@@ -138,32 +138,6 @@
         color: #ffffff;
       }
 
-      /* --- Testimonial Slider --- */
-      .testimonial-slider .tns-item {
-        text-align: center;
-      }
-      .tns-nav {
-        text-align: center;
-        margin-top: 2rem;
-      }
-      .tns-nav button {
-        width: 10px;
-        height: 10px;
-        background-color: #a0a0a0;
-        border: none;
-        border-radius: 50%;
-        margin: 0 5px;
-        padding: 0;
-        transition: background-color 0.3s ease;
-      }
-      .tns-nav button.tns-nav-active {
-        background-color: #ffffff;
-      }
-      .quote-icon {
-        color: #eab308; /* yellow-400 */
-        margin-bottom: 1.5rem;
-      }
-
       /* --- Portfolio Section --- */
       .filter-btn {
         text-transform: uppercase;
@@ -335,27 +309,6 @@
         right: 0;
       }
 
-      /* Animação de surgimento */
-      .journal-item {
-        opacity: 0;
-        transform: translateY(40px);
-        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-      }
-      .journal-item.is-visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      /* Atrasos para a animação não acontecer toda de uma vez */
-      .journal-item:nth-child(2) {
-        transition-delay: 0.1s;
-      }
-      .journal-item:nth-child(3) {
-        transition-delay: 0.2s;
-      }
-      .journal-item:nth-child(4) {
-        transition-delay: 0.3s;
-      }
-
       /* --- Seção Final "Hello" (Contato) --- */
       .bg-map-image {
         background-image: url('https://snazzy-maps-cdn.azureedge.net/assets/15-subtle-grayscale.png?v=20170523093259');
@@ -416,6 +369,72 @@
         background-color: #eab308;
         color: #121212;
         border-color: #eab308;
+      }
+
+      .titulo-transformador {
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 2.25rem;
+        font-weight: 300;
+        letter-spacing: 0.05em;
+        line-height: 1.1;
+        text-align: center;
+        color: #555;
+
+        transition: all 0.4s ease-in-out;
+      }
+
+      .titulo-transformador:hover {
+        letter-spacing: 0.1em;
+        color: #facc15;
+        cursor: pointer;
+        text-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      }
+
+      .journal-item {
+        opacity: 0;
+        transform: translateY(40px);
+        /* Unifica as transições para todas as propriedades que vamos animar */
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out,
+          box-shadow 0.3s ease-in-out;
+      }
+
+      .journal-item.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+        cursor: pointer; /* Adiciona o cursor quando o item está visível */
+      }
+
+      /* Combina o estado visível com o hover para o efeito de escala */
+      .journal-text-block {
+        transition: transform 0.3s;
+      }
+      .journal-text-block:hover {
+        transform: scale(1.03); /* Mantém o translateY(0) e adiciona o scale */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      }
+
+      /* Atrasos para a animação não acontecer toda de uma vez (mantém o que você já tinha) */
+      .journal-item:nth-child(2) {
+        transition-delay: 0.1s;
+      }
+      .journal-item:nth-child(3) {
+        transition-delay: 0.2s;
+      }
+      .journal-item:nth-child(4) {
+        transition-delay: 0.3s;
+      }
+
+      /* Estilo para a barra de rolagem do modal, opcional mas recomendado */
+      #modal-content div::-webkit-scrollbar {
+        width: 8px;
+      }
+      #modal-content div::-webkit-scrollbar-track {
+        background: #1f1f1f;
+      }
+      #modal-content div::-webkit-scrollbar-thumb {
+        background-color: #4a4a4a;
+        border-radius: 10px;
+        border: 2px solid #1f1f1f;
       }
     </style>
   </head>
@@ -714,57 +733,6 @@
       </div>
     </section>
 
-    <section id="testimonials" class="py-20 md:py-32 bg-[#121212]">
-      <div class="container mx-auto max-w-4xl px-6 text-center">
-        <div class="testimonial-slider">
-          <div>
-            <div class="quote-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="44"
-                height="44"
-                fill="currentColor"
-                class="bi bi-quote mx-auto"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1h2Zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1h2Z"
-                />
-              </svg>
-            </div>
-            <h4
-              class="font-playfair text-2xl md:text-3xl font-bold leading-relaxed"
-            >
-              "Eu dobrei meu faturamento, mas o maior ganho foi ter paz de
-              espírito e tempo para minha família. Isso não tem preço."
-            </h4>
-          </div>
-          <div>
-            <div class="quote-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="44"
-                height="44"
-                fill="currentColor"
-                class="bi bi-quote mx-auto"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1h2Zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1h2Z"
-                />
-              </svg>
-            </div>
-            <h4
-              class="font-playfair text-2xl md:text-3xl font-bold leading-relaxed"
-            >
-              "A metodologia do Moacir me ensinou que cuidar de mim era o melhor
-              investimento que eu poderia fazer na minha empresa."
-            </h4>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section id="portfolio" class="pt-20 md:pt-32 bg-[#121212]">
       <div class="container mx-auto max-w-7xl px-6 mb-12 md:mb-20">
         <p class="text-sm uppercase tracking-widest text-gray-400">
@@ -899,7 +867,7 @@
         href="#hello"
         class="inline-block py-12 text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-white transition-colors duration-300"
       >
-        vamos construir sua transformação juntos
+        Se você quer viver essa transformação, conte comigo!
       </a>
     </section>
 
@@ -956,11 +924,11 @@
       <div class="container mx-auto max-w-7xl px-6">
         <div class="mb-12 md:mb-20">
           <p class="text-sm uppercase tracking-widest text-gray-400">
-            Como funciona <b class="font-bold text-white">minha metodologia</b>
+            Como funciona
+            <b class="font-bold text-white">minha filosofia para os negócios</b>
           </p>
           <h3 class="text-3xl md:text-4xl font-light mt-4 max-w-4xl">
-            Uma abordagem integral para performance sustentável. Não separamos o
-            profissional do pessoal, nós os integramos para gerar resultados
+            Os dois precisam evoluir juntos para gerar resultados
             extraordinários.
           </h3>
         </div>
@@ -985,11 +953,11 @@
               </svg>
             </div>
             <h5 class="text-xl font-bold uppercase tracking-widest mb-4">
-              Propósito e Visão.
+              Definir Propósito e Visão.
             </h5>
             <p class="text-gray-400">
-              Redescobrimos seu 'porquê' para alinhar suas metas de negócio com
-              sua missão de vida, criando uma motivação inabalável.
+              Redescobrir seu 'porquê' para alinhar suas metas de negócio com
+              sua missão de vida, e criar uma motivação inabalável.
             </p>
           </div>
 
@@ -1009,11 +977,11 @@
               </svg>
             </div>
             <h5 class="text-xl font-bold uppercase tracking-widest mb-4">
-              Hábitos de Performance.
+              Implementar Hábitos de Performance.
             </h5>
             <p class="text-gray-400">
-              Implementamos rotinas de saúde, disciplina e foco que transbordam
-              do pessoal para o profissional, otimizando sua energia.
+              Implementar rotinas de saúde, disciplina e foco que transbordem do
+              pessoal para o profissional, para otimizar sua energia.
             </p>
           </div>
 
@@ -1037,10 +1005,10 @@
               </svg>
             </div>
             <h5 class="text-xl font-bold uppercase tracking-widest mb-4">
-              Conexões Genuínas.
+              Desenvolver Conexões Genuínas.
             </h5>
             <p class="text-gray-400">
-              Desenvolvemos networking e relacionamentos baseados em confiança e
+              Desenvolver networking e relacionamentos baseados em confiança e
               valor mútuo, não apenas em transações comerciais.
             </p>
           </div>
@@ -1064,12 +1032,11 @@
               </svg>
             </div>
             <h5 class="text-xl font-bold uppercase tracking-widest mb-4">
-              Impacto e Legado.
+              Criar Impacto e Legado.
             </h5>
             <p class="text-gray-400">
-              Conectamos seu sucesso a um propósito maior, seja através de
-              projetos sociais ou da construção de um legado que transcende o
-              lucro.
+              Conectar seu sucesso a um propósito maior, através de projetos
+              sociais ou da construção de um legado que transcenda o lucro.
             </p>
           </div>
 
@@ -1090,10 +1057,10 @@
               </svg>
             </div>
             <h5 class="text-xl font-bold uppercase tracking-widest mb-4">
-              Liderança Humana.
+              Desenvolver uma Liderança Humana.
             </h5>
             <p class="text-gray-400">
-              Desenvolvemos uma liderança que inspira pelo exemplo, baseada em
+              Desenvolver uma liderança que inspire pelo exemplo, baseada em
               empatia, vulnerabilidade e na capacidade de extrair o melhor de
               cada pessoa.
             </p>
@@ -1119,11 +1086,11 @@
               </svg>
             </div>
             <h5 class="text-xl font-bold uppercase tracking-widest mb-4">
-              Resultados Sustentáveis.
+              Garantir Resultados Sustentáveis.
             </h5>
             <p class="text-gray-400">
-              O objetivo final é criar um crescimento consistente e duradouro,
-              que não esgota sua energia nem sacrifica sua qualidade de vida.
+              Criar um crescimento consistente e duradouro, que não esgote sua
+              energia nem sacrifique sua qualidade de vida.
             </p>
           </div>
         </div>
@@ -1134,17 +1101,15 @@
     >
       <div class="container mx-auto max-w-7xl px-6 relative z-10">
         <a href="#hello">
-          <h2
-            class="text-3xl md:text-4xl font-light tracking-wider leading-relaxed"
-          >
-            Você quer apenas vender mais<br />ou transformar sua vida por
-            completo?
+          <h2 class="titulo-transformador">
+            Quero transformar a minha vida pessoal<br />
+            e profissional por completo!
           </h2>
         </a>
       </div>
     </section>
 
-    <section id="blog" class="py-20 md:py-32 bg-[#121212]">
+    <section id="blog" class="py-20 md:py-32">
       <div class="container mx-auto max-w-7xl px-6">
         <div class="mb-12 md:mb-20">
           <p class="text-sm uppercase tracking-widest text-gray-400">
@@ -1159,90 +1124,98 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
-          <div class="journal-item flex items-center">
-            <div
-              class="journal-text-block line-left bg-[#1f1f1f] p-8 md:p-12 w-full"
-            >
-              <p class="text-xs uppercase tracking-widest text-gray-500 mb-4">
-                Por: Moacir. <span class="ml-4">Setembro 05, 2025.</span>
-              </p>
-              <h5 class="text-2xl font-bold mb-4">O ROI de uma Maratona</h5>
-              <a
-                href="#"
-                class="text-yellow-400 text-xs font-bold uppercase tracking-widest hover:text-white transition-colors"
-                >Ler Mais</a
-              >
-            </div>
-          </div>
-
-          <div class="journal-item flex flex-col md:flex-row bg-[#1f1f1f]">
+          <div
+            class="journal-item group cursor-pointer flex flex-col md:flex-row bg-[#1f1f1f] transition-transform duration-300 hover:scale-[1.02]"
+            data-title="Por que sua Empresa de Software Precisa de um Astronauta?"
+            data-author="Moacir"
+            data-date="07 de Setembro, 2025"
+            data-images="./imagens/robo.jpg"
+            data-content="Em um mercado saturado de soluções tecnológicas complexas, como uma marca pode se destacar? A resposta pode não estar em mais uma feature, mas em um mascote. Neste post, exploramos o ROI da criatividade em eventos de tecnologia, mostrando como um simples astronauta pode quebrar barreiras, gerar leads qualificados e transformar sua marca em uma experiência memorável. A verdade é que a atenção é a moeda mais valiosa em uma feira de negócios, e o branding humanizado é a melhor forma de conquistá-la."
+          >
             <div
               class="journal-text-block line-left p-8 md:p-12 w-full md:w-1/2 flex flex-col justify-center"
             >
               <p class="text-xs uppercase tracking-widest text-gray-500 mb-4">
-                Por: Moacir. <span class="ml-4">Agosto 21, 2025.</span>
+                Por: Moacir. <span class="ml-4">Setembro 07, 2025.</span>
               </p>
               <h5 class="text-2xl font-bold mb-4">
-                Liderança se aprende servindo.
+                Por que sua Empresa de Software Precisa de um Astronauta?
               </h5>
               <a
                 href="#"
-                class="text-yellow-400 text-xs font-bold uppercase tracking-widest hover:text-white transition-colors"
+                class="text-yellow-400 text-xs font-bold uppercase tracking-widest group-hover:text-white transition-colors"
                 >Ler Mais</a
               >
             </div>
-            <div class="w-full md:w-1/2">
+            <div class="w-full md:w-1/2 h-64 md:h-auto">
               <img
-                src="https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/1.jpg"
-                alt="Voluntariado"
+                src="./imagens/robo.jpg"
+                alt="Marketing em Evento de Tecnologia"
                 class="h-full w-full object-cover"
               />
             </div>
           </div>
 
-          <div class="journal-item flex flex-col md:flex-row bg-[#1f1f1f]">
-            <div class="w-full md:w-1/2 order-last md:order-first">
-              <img
-                src="https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/2.jpg"
-                alt="Networking"
-                class="h-full w-full object-cover"
-              />
-            </div>
-            <div
-              class="journal-text-block line-right p-8 md:p-12 w-full md:w-1/2 flex flex-col justify-center"
-            >
-              <p class="text-xs uppercase tracking-widest text-gray-500 mb-4">
-                Por: Moacir. <span class="ml-4">Julho 30, 2025.</span>
-              </p>
-              <h5 class="text-2xl font-bold mb-4">
-                Networking vs. Conexão Real.
-              </h5>
-              <a
-                href="#"
-                class="text-yellow-400 text-xs font-bold uppercase tracking-widest hover:text-white transition-colors"
-                >Ler Mais</a
-              >
-            </div>
-          </div>
-
-          <div class="journal-item flex flex-col md:flex-row bg-[#1f1f1f]">
+          <div
+            class="journal-item group cursor-pointer flex flex-col md:flex-row bg-[#1f1f1f] transition-transform duration-300 hover:scale-[1.02]"
+            data-title="Mais que um Cosplay: A Missão de Levar Alegria a Hospitais e Eventos"
+            data-author="Moacir"
+            data-date="09 de Setembro, 2025"
+            data-images="./imagens/capitao.jpg"
+            data-content="Você já imaginou encontrar o Capitão América em um dia chuvoso, não em uma batalha épica, mas espalhando sorrisos? Esse é Moacir. Por trás do escudo e do traje, existe uma missão poderosa: levar esperança e alegria para crianças em hospitais e participar de eventos sociais. Este post mergulha no universo do 'cosplay do bem', uma iniciativa que transforma a paixão por super-heróis em uma ferramenta de impacto social. Descubra como um gesto de carinho e a presença de um herói podem fazer toda a diferença no dia de alguém, provando que o maior poder de todos é a empatia."
+          >
             <div
               class="journal-text-block line-left p-8 md:p-12 w-full md:w-1/2 flex flex-col justify-center"
             >
               <p class="text-xs uppercase tracking-widest text-gray-500 mb-4">
-                Por: Moacir. <span class="ml-4">Julho 15, 2025.</span>
+                Por: Moacir. <span class="ml-4">Setembro 09, 2025.</span>
               </p>
-              <h5 class="text-2xl font-bold mb-4">A disciplina que liberta.</h5>
+              <h5 class="text-2xl font-bold mb-4">
+                Mais que um Cosplay: A Missão de Levar Alegria a Hospitais e
+                Eventos
+              </h5>
               <a
                 href="#"
-                class="text-yellow-400 text-xs font-bold uppercase tracking-widest hover:text-white transition-colors"
+                class="text-yellow-400 text-xs font-bold uppercase tracking-widest group-hover:text-white transition-colors"
                 >Ler Mais</a
               >
             </div>
-            <div class="w-full md:w-1/2">
+            <div class="w-full md:w-1/2 h-64 md:h-auto">
               <img
-                src="https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/3.jpg"
-                alt="Rotina"
+                src="./imagens/capitao.jpg"
+                alt="Moacir vestido de Capitão América em evento social"
+                class="h-full w-full object-cover"
+              />
+            </div>
+          </div>
+
+          <div
+            class="journal-item group cursor-pointer flex flex-col md:flex-row bg-[#1f1f1f] transition-transform duration-300 hover:scale-[1.02]"
+            data-title="Além do Código: Superando Limites em Equipe no Desafio do Vale"
+            data-author="Moacir"
+            data-date="15 de Setembro, 2025"
+            data-images="./imagens/corrida.jpg"
+            data-content="Neste fim de semana, trocamos as telas e os teclados pela lama e as trilhas de Indaial para encarar o Desafio do Vale. Mais do que uma simples corrida, foi um teste de resistência, colaboração e espírito de equipe. Cada obstáculo superado e cada medalha conquistada representa a força que temos quando trabalhamos juntos, apoiando um ao outro. Este post celebra a cultura de ir além, de provar que a mesma determinação que usamos para desenvolver software pode nos levar a cruzar qualquer linha de chegada. Porque acreditamos que equipes que superam desafios unidas, permanecem unidas."
+          >
+            <div
+              class="journal-text-block line-left p-8 md:p-12 w-full md:w-1/2 flex flex-col justify-center"
+            >
+              <p class="text-xs uppercase tracking-widest text-gray-500 mb-4">
+                Por: Moacir. <span class="ml-4">Setembro 15, 2025.</span>
+              </p>
+              <h5 class="text-2xl font-bold mb-4">
+                Além do Código: Superando Limites em Equipe no Desafio do Vale
+              </h5>
+              <a
+                href="#"
+                class="text-yellow-400 text-xs font-bold uppercase tracking-widest group-hover:text-white transition-colors"
+                >Ler Mais</a
+              >
+            </div>
+            <div class="w-full md:w-1/2 h-64 md:h-auto">
+              <img
+                src="./imagens/corrida-principal.jpg"
+                alt="Equipe reunida com medalhas após completar o Desafio do Vale"
                 class="h-full w-full object-cover"
               />
             </div>
@@ -1250,6 +1223,39 @@
         </div>
       </div>
     </section>
+
+    <div
+      id="blog-modal"
+      class="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center p-4 z-50 hidden opacity-0 transition-opacity duration-300"
+    >
+      <div
+        id="modal-content"
+        class="bg-[#1f1f1f] text-white max-w-5xl w-full max-h-[90vh] flex flex-col md:flex-row rounded-lg overflow-hidden transform scale-95 transition-transform duration-300"
+      >
+        <div class="w-full md:w-1/2 h-64 md:h-auto">
+          <img
+            id="modal-img"
+            src=""
+            alt="Imagem do Post"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col overflow-y-auto">
+          <h3 id="modal-title" class="text-3xl font-bold mb-4"></h3>
+          <p
+            id="modal-meta"
+            class="text-xs uppercase tracking-widest text-gray-400 mb-6"
+          ></p>
+          <div id="modal-body" class="text-gray-300 leading-relaxed"></div>
+        </div>
+      </div>
+      <button
+        id="close-modal"
+        class="absolute top-4 right-4 text-white text-3xl font-bold hover:text-yellow-400 transition-colors"
+      >
+        &times;
+      </button>
+    </div>
 
     <section class="bg-[#1f1f1f] text-center">
       <a
@@ -1260,11 +1266,7 @@
       </a>
     </section>
 
-    <section id="hello" class="relative h-96 md:h-[500px]">
-      <div class="absolute inset-0 bg-map-image bg-cover bg-center"></div>
-    </section>
-
-    <section class="relative z-10 -mt-24 pb-20 md:pb-32">
+    <section class="relative z-10">
       <div class="container mx-auto max-w-7xl px-6">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-px">
           <div class="bg-[#242424] p-8 text-center">
@@ -1392,220 +1394,242 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        // --- Mobile Menu Toggle ---
+        // ==================================
+        // SELEÇÃO GERAL DE ELEMENTOS
+        // ==================================
+
+        // --- Menu Mobile ---
         const menuToggleBtn = document.getElementById('menu-toggle-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const mobileLinks = document.querySelectorAll('.mobile-link');
 
-        function toggleMenu() {
-          menuToggleBtn.classList.toggle('open');
-          mobileMenu.classList.toggle('hidden');
-          document.body.classList.toggle('overflow-hidden'); // Impede a rolagem quando o menu está aberto
-        }
-
-        menuToggleBtn.addEventListener('click', toggleMenu);
-
-        // Fecha o menu quando um link é clicado
-        mobileLinks.forEach(link => {
-          link.addEventListener('click', toggleMenu);
-        });
-
-        // --- Active Nav Link Styling on Scroll ---
+        // --- Navegação Ativa com Scroll ---
         const mainNavLinks = document.querySelectorAll('.main-nav a');
         const sections = document.querySelectorAll('main, section');
 
-        const observerOptions = {
-          root: null,
-          rootMargin: '0px',
-          threshold: 0.3,
-        };
+        // --- Animação de Contadores ---
+        const counters = document.querySelectorAll('.counter');
 
-        const observer = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const currentId = entry.target.id;
-              mainNavLinks.forEach(link => {
-                link.classList.remove('active', 'text-white');
-                link.classList.add('text-gray-400');
-                if (link.getAttribute('href').includes(currentId)) {
-                  link.classList.add('active', 'text-white');
-                  link.classList.remove('text-gray-400');
+        // --- Filtro do Portfólio ---
+        const portfolioGrid = document.getElementById('portfolio-grid');
+
+        // --- Animação das Barras de Habilidade ---
+        const skillBars = document.querySelectorAll('.progress-bar');
+
+        // --- Modal do Blog ---
+        const blogModal = document.getElementById('blog-modal');
+        const modalContent = document.getElementById('modal-content');
+        const closeModalBtn = document.getElementById('close-modal');
+        const journalItems = document.querySelectorAll('.journal-item');
+        const modalImg = document.getElementById('modal-img');
+        const modalTitle = document.getElementById('modal-title');
+        const modalMeta = document.getElementById('modal-meta');
+        const modalBody = document.getElementById('modal-body');
+
+        // --- Botão de Voltar ao Topo ---
+        const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+        // ==================================
+        // FUNCIONALIDADES
+        // ==================================
+
+        // --- 1. Lógica do Menu Mobile ---
+        if (menuToggleBtn && mobileMenu) {
+          const toggleMenu = () => {
+            menuToggleBtn.classList.toggle('open');
+            mobileMenu.classList.toggle('hidden');
+            document.body.classList.toggle('overflow-hidden');
+          };
+          menuToggleBtn.addEventListener('click', toggleMenu);
+          mobileLinks.forEach(link => {
+            link.addEventListener('click', toggleMenu);
+          });
+        }
+
+        // --- 2. Lógica da Navegação Ativa com Scroll ---
+        if (mainNavLinks.length > 0 && sections.length > 0) {
+          const observer = new IntersectionObserver(
+            entries => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  const currentId = entry.target.id;
+                  mainNavLinks.forEach(link => {
+                    const isCurrent = link
+                      .getAttribute('href')
+                      .includes(currentId);
+                    link.classList.toggle('active', isCurrent);
+                    link.classList.toggle('text-white', isCurrent);
+                    link.classList.toggle('text-gray-400', !isCurrent);
+                  });
                 }
               });
-            }
-          });
-        }, observerOptions);
-
-        sections.forEach(section => {
-          observer.observe(section);
-        });
-
-        // --- Counter Animation ---
-        const counters = document.querySelectorAll('.counter');
-        const speed = 200; // Quanto menor o número, mais rápido a contagem
-
-        const counterObserver = new IntersectionObserver(
-          (entries, observer) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                const counter = entry.target;
-                const updateCount = () => {
-                  const target = +counter.getAttribute('data-target');
-                  const count = +counter.innerText;
-                  const increment = target / speed;
-
-                  if (count < target) {
-                    counter.innerText = Math.ceil(count + increment);
-                    setTimeout(updateCount, 1);
-                  } else {
-                    counter.innerText = target;
-                  }
-                };
-                updateCount();
-                observer.unobserve(counter); // Para de observar após animar
-              }
-            });
-          },
-          { threshold: 0.5 },
-        );
-
-        counters.forEach(counter => {
-          counterObserver.observe(counter);
-        });
-
-        // --- Testimonial Slider Initialization ---
-        if (document.querySelector('.testimonial-slider')) {
-          tns({
-            container: '.testimonial-slider',
-            items: 1,
-            slideBy: 'page',
-            autoplay: true,
-            controls: false,
-            autoplayButtonOutput: false,
-            mouseDrag: true,
-            lazyload: true,
-            mode: 'gallery',
-            speed: 500,
+            },
+            { root: null, rootMargin: '0px', threshold: 0.3 },
+          );
+          sections.forEach(section => {
+            if (section.id) observer.observe(section);
           });
         }
 
-        // --- Portfolio Filter (Shuffle.js) ---
-        const portfolioGrid = document.getElementById('portfolio-grid');
-        const filterButtons = document.querySelector('#portfolio-filters');
+        // --- 3. Lógica da Animação de Contadores ---
+        if (counters.length > 0) {
+          const counterObserver = new IntersectionObserver(
+            (entries, observer) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  const counter = entry.target;
+                  const target = +counter.getAttribute('data-target');
+                  const speed = 200;
+                  const updateCount = () => {
+                    const count = +counter.innerText;
+                    const increment = target / speed;
+                    if (count < target) {
+                      counter.innerText = Math.ceil(count + increment);
+                      setTimeout(updateCount, 1);
+                    } else {
+                      counter.innerText = target;
+                    }
+                  };
+                  updateCount();
+                  observer.unobserve(counter);
+                }
+              });
+            },
+            { threshold: 0.5 },
+          );
+          counters.forEach(counter => counterObserver.observe(counter));
+        }
 
-        if (portfolioGrid) {
+        // --- 4. Lógica do Filtro do Portfólio (Shuffle.js) ---
+        if (typeof Shuffle !== 'undefined' && portfolioGrid) {
           const shuffleInstance = new Shuffle(portfolioGrid, {
             itemSelector: '.portfolio-item',
-            sizer: '.portfolio-sizer', // Usa o elemento sizer para calcular as colunas
+            sizer: '.portfolio-sizer',
           });
-
-          filterButtons.addEventListener('click', event => {
-            if (event.target.tagName !== 'BUTTON') {
-              return;
-            }
-            const btn = event.target;
-            const group = btn.getAttribute('data-group');
-
-            // Remove a classe 'active' de todos os botões
-            filterButtons.querySelector('.active').classList.remove('active');
-
-            // Adiciona a classe 'active' ao botão clicado
-            btn.classList.add('active');
-
-            // Filtra os itens
-            shuffleInstance.filter(group);
-          });
+          const filterButtons = document.querySelector('#portfolio-filters');
+          if (filterButtons) {
+            filterButtons.addEventListener('click', event => {
+              if (event.target.tagName === 'BUTTON') {
+                const group = event.target.getAttribute('data-group');
+                filterButtons
+                  .querySelector('.active')
+                  .classList.remove('active');
+                event.target.classList.add('active');
+                shuffleInstance.filter(group);
+              }
+            });
+          }
         }
 
-        if (document.querySelector('.logo-carousel')) {
+        // --- 5. Lógica do Carrossel de Logos (Tiny-Slider.js) ---
+        if (
+          typeof tns !== 'undefined' &&
+          document.querySelector('.logo-carousel')
+        ) {
           tns({
             container: '.logo-carousel',
-            items: 2, // Itens visíveis em telas pequenas
+            items: 2,
             slideBy: 'page',
             autoplay: true,
             autoplayTimeout: 3000,
             autoplayButtonOutput: false,
             speed: 400,
             controls: false,
-            nav: true, // Habilita a navegação por pontos/linhas
+            nav: true,
             navPosition: 'bottom',
             mouseDrag: true,
             responsive: {
-              640: {
-                // A partir de 640px de largura
-                items: 3,
-              },
-              768: {
-                // A partir de 768px de largura
-                items: 4,
-              },
-              1024: {
-                // A partir de 1024px de largura
-                items: 5,
-              },
+              640: { items: 3 },
+              768: { items: 4 },
+              1024: { items: 5 },
             },
           });
         }
 
-        // --- Skills Bar Animation ---
-        const skillBars = document.querySelectorAll('.progress-bar');
+        // --- 6. Lógica da Animação das Barras de Habilidade ---
+        if (skillBars.length > 0) {
+          const skillObserver = new IntersectionObserver(
+            (entries, observer) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  const bar = entry.target;
+                  bar.style.width = bar.getAttribute('data-width');
+                  observer.unobserve(bar);
+                }
+              });
+            },
+            { threshold: 0.5 },
+          );
+          skillBars.forEach(bar => skillObserver.observe(bar));
+        }
 
-        const skillObserver = new IntersectionObserver(
-          (entries, observer) => {
-            entries.forEach(entry => {
-              // Quando a barra entra na tela
-              if (entry.isIntersecting) {
-                const bar = entry.target;
-                const targetWidth = bar.getAttribute('data-width');
+        // --- 7. Lógica do Modal do Blog e Animações ---
+        if (journalItems.length > 0 && blogModal) {
+          // Função para abrir o modal
+          const openModal = data => {
+            const firstImage = data.images.split(',').map(url => url.trim())[0];
+            modalImg.src = firstImage;
+            modalImg.alt = data.title;
+            modalTitle.textContent = data.title;
+            modalMeta.textContent = `Por: ${data.author} • ${data.date}`;
+            modalBody.textContent = data.content;
+            blogModal.classList.remove('hidden');
+            setTimeout(() => {
+              blogModal.classList.remove('opacity-0');
+              modalContent.classList.remove('scale-95');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+          };
 
-                // Aplica a largura alvo para iniciar a animação CSS
-                bar.style.width = targetWidth;
+          // Função para fechar o modal
+          const closeModal = () => {
+            blogModal.classList.add('opacity-0');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+              blogModal.classList.add('hidden');
+            }, 300);
+            document.body.style.overflow = '';
+          };
 
-                // Para de observar a barra para não animar de novo
-                observer.unobserve(bar);
-              }
+          // Adiciona eventos de clique para abrir o modal
+          journalItems.forEach(item => {
+            item.addEventListener('click', e => {
+              e.preventDefault();
+              openModal(item.dataset);
             });
-          },
-          {
-            threshold: 0.5, // Começa a animação quando 50% da barra estiver visível
-          },
-        );
+          });
 
-        skillBars.forEach(bar => {
-          skillObserver.observe(bar);
-        });
+          // Adiciona eventos para fechar o modal
+          closeModalBtn.addEventListener('click', closeModal);
+          blogModal.addEventListener('click', e => {
+            if (e.target === blogModal) closeModal();
+          });
+          document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && !blogModal.classList.contains('hidden')) {
+              closeModal();
+            }
+          });
 
-        // --- Journal Item Animation on Scroll ---
-        const journalItems = document.querySelectorAll('.journal-item');
+          // Animação de surgimento dos itens do blog
+          const journalObserver = new IntersectionObserver(
+            (entries, observer) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('is-visible');
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.1 },
+          );
+          journalItems.forEach(item => journalObserver.observe(item));
+        }
 
-        const journalObserver = new IntersectionObserver(
-          (entries, observer) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          {
-            threshold: 0.1, // Anima quando 10% do item estiver visível
-          },
-        );
-
-        journalItems.forEach(item => {
-          journalObserver.observe(item);
-        });
-
-        // --- Scroll to Top Button ---
-        const scrollToTopBtn = document.getElementById('scroll-to-top');
-
+        // --- 8. Lógica do Botão de Voltar ao Topo ---
         if (scrollToTopBtn) {
           scrollToTopBtn.addEventListener('click', event => {
-            event.preventDefault(); // Impede o comportamento padrão do link
-            window.scrollTo({
-              top: 0,
-              behavior: 'smooth', // A mágica da rolagem suave
-            });
+            event.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
           });
         }
       });
