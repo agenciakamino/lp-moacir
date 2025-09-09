@@ -36,7 +36,7 @@
         font-family: 'Playfair Display', serif;
       }
 
-      /* --- Text Background Effect --- */
+      /* --- Text Background Effect ---
       .text-background {
         background-image: url('https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/home-1.jpg');
         background-size: cover;
@@ -45,7 +45,7 @@
         background-clip: text;
         -webkit-text-fill-color: transparent;
         color: transparent;
-      }
+      }*/
 
       /* --- Header Styles --- */
       .main-nav a {
@@ -285,7 +285,7 @@
 
       /* --- Seção Parallax Final --- */
       .parallax-final {
-        background-image: url('https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/parallax-3-70.jpg');
+        background-image: url('./imagens/blumenau-sc-4.jpg');
       }
 
       /* --- Journal Section --- */
@@ -378,7 +378,7 @@
         letter-spacing: 0.05em;
         line-height: 1.1;
         text-align: center;
-        color: #555;
+        color: #f7f7f7;
 
         transition: all 0.4s ease-in-out;
       }
@@ -387,7 +387,6 @@
         letter-spacing: 0.1em;
         color: #facc15;
         cursor: pointer;
-        text-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
       }
 
       .journal-item {
@@ -435,6 +434,46 @@
         background-color: #4a4a4a;
         border-radius: 10px;
         border: 2px solid #1f1f1f;
+      }
+
+      #home {
+        /* Sua imagem de fundo atual */
+        background-image: url('./imagens/corrida-principal.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        position: relative; /* Necessário para posicionar o pseudo-elemento */
+        overflow: hidden; /* Garante que o gradiente não vaze */
+      }
+
+      #home::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          ellipse at center,
+          rgba(0, 0, 0, 0) 0%,
+          rgba(0, 0, 0, 0.3) 50%,
+          rgba(0, 0, 0, 0.7) 100%
+        );
+        z-index: 1; /* Garante que o overlay fique por cima da imagem */
+      }
+
+      /* Estilo para o texto, garantindo que ele fique por cima do overlay */
+      #home h1 {
+        /* Suas propriedades atuais */
+        position: relative;
+        z-index: 2;
+        color: transparent;
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: white;
+
+        /* Adicione esta linha: */
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
       }
     </style>
   </head>
@@ -513,7 +552,7 @@
       class="h-screen flex items-center justify-center text-center px-4"
     >
       <h1
-        class="text-background font-playfair text-6xl md:text-8xl lg:text-9xl xl:text-[10rem] font-bold leading-none"
+        class="text-white font-playfair text-6xl md:text-6xl lg:text-8xl xl:text-[10rem] font-bold leading-none mt-[4rem]"
       >
         Resultados<br />
         com propósito.
@@ -527,16 +566,28 @@
             fetchpriority="high"
             decoding="async"
             src="./imagens/moacir.png"
-            class="w-full h-auto"
+            class="w-full h-auto rounded-lg shadow-2xl"
             alt="Moacir em um evento ou correndo"
           />
+        </div>
+
+        <div class="text-center mb-16 md:mb-24">
+          <h2
+            class="text-white text-4xl md:text-5xl font-bold uppercase tracking-widest mb-4"
+          >
+            A Jornada de Moacir
+          </h2>
+          <p class="text-gray-400 max-w-3xl mx-auto">
+            Da busca por resultados à descoberta de um propósito maior. Esta é a
+            história por trás de uma vida com significado.
+          </p>
         </div>
 
         <div
           class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left"
         >
           <div class="about-wrap">
-            <div class="about-icon mx-auto md:mx-0">
+            <div class="about-icon mx-auto md:mx-0 text-yellow-400 mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="32"
@@ -549,8 +600,10 @@
                 />
               </svg>
             </div>
-            <h5 class="text-xl font-bold uppercase tracking-widest mb-4">
-              O SUCESSO VAZIO.
+            <h5
+              class="text-xl font-bold uppercase tracking-widest mb-4 text-yellow-400"
+            >
+              O SUCESSO VAZIO
             </h5>
             <p class="text-gray-400">
               Eu tinha os resultados que muitos sonham: negócios prósperos,
@@ -560,7 +613,7 @@
           </div>
 
           <div class="about-wrap">
-            <div class="about-icon mx-auto md:mx-0">
+            <div class="about-icon mx-auto md:mx-0 text-yellow-400 mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="32"
@@ -574,8 +627,10 @@
                 />
               </svg>
             </div>
-            <h5 class="text-xl font-bold uppercase tracking-widest mb-4">
-              A VIRADA DE CHAVE.
+            <h5
+              class="text-xl font-bold uppercase tracking-widest mb-4 text-yellow-400"
+            >
+              A VIRADA DE CHAVE
             </h5>
             <p class="text-gray-400">
               Descobri no esporte, nas conexões genuínas e no impacto social a
@@ -585,7 +640,7 @@
           </div>
 
           <div class="about-wrap">
-            <div class="about-icon mx-auto md:mx-0">
+            <div class="about-icon mx-auto md:mx-0 text-yellow-400 mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="32"
@@ -598,8 +653,10 @@
                 />
               </svg>
             </div>
-            <h5 class="text-xl font-bold uppercase tracking-widest mb-4">
-              A MINHA MISSÃO.
+            <h5
+              class="text-xl font-bold uppercase tracking-widest mb-4 text-yellow-400"
+            >
+              A MINHA MISSÃO
             </h5>
             <p class="text-gray-400">
               Hoje, minha missão é guiar empresários e líderes a construir não
@@ -773,8 +830,8 @@
       <div id="portfolio-grid" class="w-full">
         <div class="portfolio-sizer"></div>
 
-        <a href="#" class="portfolio-item" data-groups='["corridas", "social"]'>
-          <img src="./imagens/1.jpg" alt="Maratona Pela Vida" />
+        <a href="#" class="portfolio-item" data-groups='["corridas"]'>
+          <img src="./imagens/corrida.jpg" alt="Maratona Pela Vida" />
           <div class="portfolio-overlay">
             <div class="portfolio-text">
               <span class="text-sm uppercase tracking-widest">
@@ -798,7 +855,7 @@
         </a>
 
         <a href="#" class="portfolio-item" data-groups='["social"]'>
-          <img src="./imagens/3.jpg" alt="Voluntariado em Ação" />
+          <img src="./imagens/capitao.jpg" alt="Voluntariado em Ação" />
           <div class="portfolio-overlay">
             <div class="portfolio-text">
               <span class="text-sm uppercase tracking-widest">
@@ -822,27 +879,25 @@
         </a>
 
         <a href="#" class="portfolio-item" data-groups='["conexoes"]'>
-          <img src="./imagens/5.jpg" alt="Palestra sobre Liderança" />
+          <img src="./imagens/ciclismo.jpg" alt="Palestra sobre Liderança" />
           <div class="portfolio-overlay">
             <div class="portfolio-text">
               <span class="text-sm uppercase tracking-widest">
                 Eventos e Conexões
               </span>
-              <h3 class="text-2xl font-bold mt-1">
-                Palestra sobre Liderança Humana
-              </h3>
+              <h3 class="text-2xl font-bold mt-1">Ciclismo</h3>
             </div>
           </div>
         </a>
 
         <a href="#" class="portfolio-item" data-groups='["social", "conexoes"]'>
-          <img src="./imagens/6.jpg" alt="Evento Beneficente" />
+          <img src="./imagens/P.SOCIAIS.jpg" alt="Evento Beneficente" />
           <div class="portfolio-overlay">
             <div class="portfolio-text">
               <span class="text-sm uppercase tracking-widest">
                 Projetos Sociais / Conexões
               </span>
-              <h3 class="text-2xl font-bold mt-1">Jantar Beneficente</h3>
+              <h3 class="text-2xl font-bold mt-1">Beneficente</h3>
             </div>
           </div>
         </a>
