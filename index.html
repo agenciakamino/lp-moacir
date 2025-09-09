@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moacir</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tiny Slider CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css"
+    />
+
+    <!-- Tailwind CSS for utility classes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* --- Custom Styles --- */
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background-color: #121212;
+        color: #ffffff;
+        font-family: 'Montserrat', sans-serif;
+        overflow-x: hidden;
+      }
+
+      .font-playfair {
+        font-family: 'Playfair Display', serif;
+      }
+
+      /* --- Text Background Effect --- */
+      .text-background {
+        background-image: url('https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/home-1.jpg');
+        background-size: cover;
+        background-position: center;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+      }
+
+      /* --- Header Styles --- */
+      .main-nav a {
+        position: relative;
+        transition: color 0.3s ease;
+      }
+
+      .main-nav a:hover {
+        color: #ffffff;
+      }
+
+      /* Creates the dot effect on hover/active */
+      .main-nav a.active::after,
+      .main-nav a:hover::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -8px;
+        transform: translateX(-50%);
+        width: 5px;
+        height: 5px;
+        background-color: #ffffff;
+        border-radius: 50%;
+      }
+
+      /* Mobile Menu Toggle Button */
+      .menu-toggle span {
+        display: block;
+        width: 25px;
+        height: 2px;
+        background-color: #fff;
+        margin: 5px 0;
+        transition: all 0.3s ease-in-out;
+      }
+
+      /* Animation for hamburger to 'X' */
+      .menu-toggle.open span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      .menu-toggle.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .menu-toggle.open span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+
+      /* --- About Section Styles --- */
+      .about-icon {
+        border: 1px solid #a0a0a0;
+        color: #a0a0a0;
+        width: 80px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 2rem;
+        transition: all 0.3s ease;
+      }
+      .about-wrap:hover .about-icon {
+        border-color: #ffffff;
+        color: #ffffff;
+      }
+
+      /* --- Parallax Section --- */
+      .parallax-section {
+        background-image: url('https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/parallax-1-70.jpg');
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+      }
+      /* Overlay to darken the background image */
+      .parallax-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      /* --- Team Section --- */
+      .social-icon {
+        color: #a0a0a0;
+        transition: color 0.3s ease;
+      }
+      .social-icon:hover {
+        color: #ffffff;
+      }
+
+      /* --- Testimonial Slider --- */
+      .testimonial-slider .tns-item {
+        text-align: center;
+      }
+      .tns-nav {
+        text-align: center;
+        margin-top: 2rem;
+      }
+      .tns-nav button {
+        width: 10px;
+        height: 10px;
+        background-color: #a0a0a0;
+        border: none;
+        border-radius: 50%;
+        margin: 0 5px;
+        padding: 0;
+        transition: background-color 0.3s ease;
+      }
+      .tns-nav button.tns-nav-active {
+        background-color: #ffffff;
+      }
+      .quote-icon {
+        color: #eab308; /* yellow-400 */
+        margin-bottom: 1.5rem;
+      }
+
+      /* --- Portfolio Section --- */
+      .filter-btn {
+        text-transform: uppercase;
+        font-size: 0.875rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        color: #a0a0a0;
+        transition: all 0.3s ease;
+        background-color: transparent;
+        padding: 0.5rem 0.75rem;
+        border-radius: 9999px;
+        border: 1px solid #a0a0a0; /* Adicionando uma borda sutil */
+      }
+      .filter-btn:hover {
+        color: #ffffff;
+        border-color: #ffffff;
+      }
+      .filter-btn.active {
+        color: #121212;
+        background-color: #eab308; /* yellow-400 */
+        border-color: #eab308;
+      }
+
+      /* Sizer e Itens para o Shuffle.js */
+      .portfolio-sizer,
+      .portfolio-item {
+        width: 100%; /* Em telas pequenas, 1 coluna */
+      }
+      @media (min-width: 768px) {
+        /* Em telas médias (md), 2 colunas */
+        .portfolio-sizer,
+        .portfolio-item {
+          width: 50%;
+        }
+      }
+      @media (min-width: 1024px) {
+        /* Em telas grandes (lg), 3 colunas */
+        .portfolio-sizer,
+        .portfolio-item {
+          width: 33.33333%;
+        }
+      }
+
+      .portfolio-item {
+        position: relative;
+        overflow: hidden;
+        display: block;
+        padding: 2px; /* Cria um pequeno espaçamento entre as imagens */
+      }
+      .portfolio-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+      }
+      .portfolio-item:hover img {
+        transform: scale(1.05);
+      }
+      .portfolio-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        display: flex;
+        align-items: flex-end;
+        padding: 1.5rem;
+      }
+      .portfolio-item:hover .portfolio-overlay {
+        opacity: 1;
+      }
+      .portfolio-text {
+        color: #ffffff;
+        transform: translateY(20px);
+        opacity: 0;
+        transition: all 0.4s ease;
+        transition-delay: 0.1s;
+      }
+      .portfolio-item:hover .portfolio-text {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      /* --- Animação do Shuffle.js --- */
+      /* Esta é a parte que cria a animação suave de fade e reposicionamento */
+      #portfolio-grid {
+        position: relative; /* Essencial para o Shuffle.js */
+      }
+      .shuffle-item {
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* --- Seção de Logos (Parallax e Carrossel) --- */
+      .parallax-logos {
+        background-image: url('https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/parallax-2-70.jpg');
+      }
+
+      /* Estilo para os logos no carrossel */
+      .logo-carousel img {
+        opacity: 0.6;
+        transition: opacity 0.3s ease;
+        filter: brightness(0) invert(1); /* Garante que os logos sejam brancos */
+      }
+      .logo-carousel .tns-item:hover img {
+        opacity: 1;
+      }
+
+      /* Estilo para a navegação do carrossel (as linhas amarelas) */
+      .parallax-logos .tns-nav {
+        text-align: center;
+        margin-top: 3rem;
+      }
+      .parallax-logos .tns-nav button {
+        width: 4px;
+        height: 25px;
+        background-color: #a0a0a0; /* Cor inativa (cinza) */
+        border: none;
+        border-radius: 0;
+        margin: 0 5px;
+        padding: 0;
+        transition: background-color 0.3s ease;
+      }
+      .parallax-logos .tns-nav button.tns-nav-active {
+        background-color: #eab308; /* Cor ativa (amarelo) */
+      }
+
+      /* --- Skills Progress Bar --- */
+      .progress-bar-container {
+        width: 100%;
+        height: 4px;
+        background-color: #373737;
+        border-radius: 2px;
+      }
+      .progress-bar {
+        height: 100%;
+        width: 0%; /* Começa com 0 para a animação */
+        background-color: #eab308; /* yellow-400 */
+        border-radius: 2px;
+        transition: width 1.5s ease-in-out; /* Controla a animação */
+      }
+
+      /* --- Seção Parallax Final --- */
+      .parallax-final {
+        background-image: url('https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/parallax-3-70.jpg');
+      }
+
+      /* --- Journal Section --- */
+      .journal-text-block {
+        position: relative;
+      }
+      /* Cria a linha amarela decorativa */
+      .journal-text-block::before {
+        content: '';
+        position: absolute;
+        top: 2rem;
+        bottom: 2rem;
+        width: 4px;
+        background-color: #eab308; /* yellow-400 */
+      }
+      /* Posiciona a linha na esquerda ou direita */
+      .journal-text-block.line-left::before {
+        left: 0;
+      }
+      .journal-text-block.line-right::before {
+        right: 0;
+      }
+
+      /* Animação de surgimento */
+      .journal-item {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+      .journal-item.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      /* Atrasos para a animação não acontecer toda de uma vez */
+      .journal-item:nth-child(2) {
+        transition-delay: 0.1s;
+      }
+      .journal-item:nth-child(3) {
+        transition-delay: 0.2s;
+      }
+      .journal-item:nth-child(4) {
+        transition-delay: 0.3s;
+      }
+
+      /* --- Seção Final "Hello" (Contato) --- */
+      .bg-map-image {
+        background-image: url('https://snazzy-maps-cdn.azureedge.net/assets/15-subtle-grayscale.png?v=20170523093259');
+        filter: brightness(0.4) grayscale(0.8);
+      }
+
+      /* --- Formulário de Contato --- */
+      .form-input {
+        width: 100%;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid #4a4a4a;
+        padding: 0.75rem 0;
+        color: #ffffff;
+        font-size: 0.875rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        transition: border-color 0.3s ease;
+      }
+      .form-input::placeholder {
+        color: #a0a0a0;
+      }
+      .form-input:focus {
+        outline: none;
+        border-bottom-color: #eab308; /* yellow-400 */
+      }
+      .submit-btn {
+        background-color: #373737;
+        color: #a0a0a0;
+        border: 1px solid #4a4a4a;
+        padding: 0.75rem 2.5rem;
+        font-size: 0.875rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        border-radius: 9999px;
+        transition: all 0.3s ease;
+      }
+      .submit-btn:hover {
+        background-color: #eab308;
+        color: #121212;
+        border-color: #eab308;
+      }
+
+      /* --- Novo Footer --- */
+      .scroll-to-top-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border: 1px solid #4a4a4a;
+        border-radius: 50%;
+        color: #a0a0a0;
+        transition: all 0.3s ease;
+      }
+      .scroll-to-top-btn:hover {
+        background-color: #eab308;
+        color: #121212;
+        border-color: #eab308;
+      }
+    </style>
+  </head>
+  <body class="bg-[#121212]">
+    <header
+      id="menu-wrap"
+      class="fixed top-0 left-0 right-0 z-50 p-6 md:p-8 bg-opacity-50 bg-[#121212] backdrop-blur-sm"
+    >
+      <div class="container mx-auto max-w-7xl">
+        <nav class="flex justify-between items-center">
+          <div class="logo">
+            <a href="#">
+              <img src="./icone.png" alt="Moacir Logo" class="h-8 md:h-10" />
+            </a>
+          </div>
+
+          <ul
+            id="mainmenu"
+            class="hidden lg:flex items-center space-x-8 text-sm font-bold tracking-widest uppercase main-nav"
+          >
+            <li><a href="#home" class="text-white active">Início</a></li>
+            <li><a href="#about" class="text-gray-400">A Jornada</a></li>
+            <li><a href="#stats" class="text-gray-400">Credibilidade</a></li>
+            <li>
+              <a href="#portfolio" class="text-gray-400">Estilo de Vida</a>
+            </li>
+            <li><a href="#services" class="text-gray-400">Metodologia</a></li>
+            <li><a href="#team" class="text-gray-400">Depoimentos</a></li>
+            <li><a href="#hello" class="text-gray-400">Comece Agora</a></li>
+          </ul>
+
+          <div class="lg:hidden">
+            <button id="menu-toggle-btn" class="menu-toggle">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <div
+      id="mobile-menu"
+      class="hidden fixed top-0 left-0 w-full h-full bg-[#121212] z-40"
+    >
+      <ul
+        class="flex flex-col items-center justify-center h-full space-y-8 text-xl font-bold tracking-widest uppercase"
+      >
+        <li><a href="#home" class="text-white mobile-link">Início</a></li>
+        <li>
+          <a href="#about" class="text-gray-400 mobile-link">A Jornada</a>
+        </li>
+        <li>
+          <a href="#stats" class="text-gray-400 mobile-link">Credibilidade</a>
+        </li>
+        <li>
+          <a href="#portfolio" class="text-gray-400 mobile-link"
+            >Estilo de Vida</a
+          >
+        </li>
+        <li>
+          <a href="#services" class="text-gray-400 mobile-link">Metodologia</a>
+        </li>
+        <li>
+          <a href="#team" class="text-gray-400 mobile-link">Depoimentos</a>
+        </li>
+        <li>
+          <a href="#hello" class="text-gray-400 mobile-link">Comece Agora</a>
+        </li>
+      </ul>
+    </div>
+
+    <main
+      id="home"
+      class="h-screen flex items-center justify-center text-center px-4"
+    >
+      <h1
+        class="text-background font-playfair text-6xl md:text-8xl lg:text-9xl xl:text-[10rem] font-bold leading-none"
+      >
+        Resultados<br />
+        com propósito.
+      </h1>
+    </main>
+
+    <section id="about" class="py-20 md:py-32">
+      <div class="container mx-auto max-w-7xl px-6">
+        <div class="mb-20 md:mb-32">
+          <img
+            fetchpriority="high"
+            decoding="async"
+            src="https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/corpo.png"
+            class="w-full h-auto"
+            alt="Moacir em um evento ou correndo"
+          />
+        </div>
+
+        <div
+          class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left"
+        >
+          <div class="about-wrap">
+            <div class="about-icon mx-auto md:mx-0">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"
+                />
+              </svg>
+            </div>
+            <h5 class="text-xl font-bold uppercase tracking-widest mb-4">
+              O SUCESSO VAZIO.
+            </h5>
+            <p class="text-gray-400">
+              Eu tinha os resultados que muitos sonham: negócios prósperos,
+              reconhecimento. Mas sentia um vazio que nenhum número conseguia
+              preencher.
+            </p>
+          </div>
+
+          <div class="about-wrap">
+            <div class="about-icon mx-auto md:mx-0">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8 16a.5.5 0 0 0 .5-.5v-1.293l.646.647a.5.5 0 0 0 .708-.708l-1.5-1.5a.5.5 0 0 0-.708 0l-1.5 1.5a.5.5 0 0 0 .708.708L7.5 14.207V15.5a.5.5 0 0 0 .5.5zM8 0a.5.5 0 0 1 .5.5v1.293l.646-.647a.5.5 0 0 1 .708.708l-1.5 1.5a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 1.793V.5a.5.5 0 0 1 .5-.5zM0 8a.5.5 0 0 1 .5-.5h1.293l-.647-.646a.5.5 0 1 1 .708-.708l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708-.708l.647-.646H.5A.5.5 0 0 1 0 8zm16 0a.5.5 0 0 0-.5-.5h-1.293l.647.646a.5.5 0 0 0-.708.708l-1.5-1.5a.5.5 0 0 0 0-.708l1.5-1.5a.5.5 0 0 0 .708.708l-.647.646H15.5a.5.5 0 0 0 .5.5z"
+                />
+              </svg>
+            </div>
+            <h5 class="text-xl font-bold uppercase tracking-widest mb-4">
+              A VIRADA DE CHAVE.
+            </h5>
+            <p class="text-gray-400">
+              Descobri no esporte, nas conexões genuínas e no impacto social a
+              peça que faltava. Percebi que a transformação pessoal é o motor
+              dos melhores resultados profissionais.
+            </p>
+          </div>
+
+          <div class="about-wrap">
+            <div class="about-icon mx-auto md:mx-0">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"
+                />
+              </svg>
+            </div>
+            <h5 class="text-xl font-bold uppercase tracking-widest mb-4">
+              A MINHA MISSÃO.
+            </h5>
+            <p class="text-gray-400">
+              Hoje, minha missão é guiar empresários e líderes a construir não
+              apenas negócios de sucesso, mas vidas com significado. Uma jornada
+              de transformação integral.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="stats" class="parallax-section py-20 md:py-32">
+      <div class="container mx-auto max-w-7xl px-6 relative z-10">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div>
+            <h2
+              class="font-playfair text-6xl md:text-7xl font-bold text-yellow-400 mb-2 counter"
+              data-target="150"
+            >
+              0
+            </h2>
+            <p class="text-sm uppercase tracking-widest text-white">
+              Vidas Impactadas
+            </p>
+          </div>
+
+          <div>
+            <h2
+              class="font-playfair text-6xl md:text-7xl font-bold text-yellow-400 mb-2 counter"
+              data-target="40"
+            >
+              0
+            </h2>
+            <p class="text-sm uppercase tracking-widest text-white">
+              Empresas Aceleradas
+            </p>
+          </div>
+
+          <div>
+            <h2
+              class="font-playfair text-6xl md:text-7xl font-bold text-yellow-400 mb-2 counter"
+              data-target="80"
+            >
+              0
+            </h2>
+            <p class="text-sm uppercase tracking-widest text-white">
+              Líderes Mentorados
+            </p>
+          </div>
+
+          <div>
+            <h2
+              class="font-playfair text-6xl md:text-7xl font-bold text-yellow-400 mb-2 counter"
+              data-target="1200"
+            >
+              0
+            </h2>
+            <p class="text-sm uppercase tracking-widest text-white">
+              Km Corridos por Causas
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="team" class="py-20 md:py-32 bg-[#1f1f1f]">
+      <div class="container mx-auto max-w-7xl px-6">
+        <div class="mb-12 md:mb-20">
+          <p class="text-sm uppercase tracking-widest text-gray-400">
+            Quem já vive <b class="font-bold text-white">a transformação</b>
+          </p>
+          <h3 class="text-3xl md:text-4xl font-light mt-4 max-w-4xl">
+            Histórias reais de líderes que uniram alta performance e propósito,
+            transformando não apenas seus negócios, mas suas vidas.
+          </h3>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <img
+              src="https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/team1.jpg"
+              alt="João S., CEO"
+              class="w-full h-auto mb-6"
+            />
+            <div class="text-left">
+              <h6 class="text-xl font-bold mb-2">João S., CEO da TechInova</h6>
+              <p class="text-gray-400 text-sm mb-4 leading-relaxed">
+                "Antes do Moacir, eu era um CEO exausto. Hoje, minha empresa
+                cresceu 50%, e eu treino para uma maratona com meu filho. Ele
+                não mudou só meu negócio, mudou minha vida."
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <img
+              src="https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/team2.jpg"
+              alt="Maria P., Fundadora"
+              class="w-full h-auto mb-6"
+            />
+            <div class="text-left">
+              <h6 class="text-xl font-bold mb-2">
+                Maria P., Fundadora da Creative Co.
+              </h6>
+              <p class="text-gray-400 text-sm mb-4 leading-relaxed">
+                "Eu achava que precisava sacrificar minha saúde para crescer.
+                Moacir me provou o contrário. A metodologia dele me deu mais
+                energia, clareza e, como consequência, mais resultados."
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <img
+              src="https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/team3.jpg"
+              alt="Carlos A., Diretor"
+              class="w-full h-auto mb-6"
+            />
+            <div class="text-left">
+              <h6 class="text-xl font-bold mb-2">
+                Carlos A., Diretor Executivo
+              </h6>
+              <p class="text-gray-400 text-sm mb-4 leading-relaxed">
+                "O processo de mentoria me fez reencontrar meu propósito. Isso
+                não só redefiniu minhas metas, como me tornou um líder muito
+                mais humano e inspirador para minha equipe."
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="py-20 md:py-32 bg-[#121212]">
+      <div class="container mx-auto max-w-4xl px-6 text-center">
+        <div class="testimonial-slider">
+          <div>
+            <div class="quote-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="44"
+                height="44"
+                fill="currentColor"
+                class="bi bi-quote mx-auto"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1h2Zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1h2Z"
+                />
+              </svg>
+            </div>
+            <h4
+              class="font-playfair text-2xl md:text-3xl font-bold leading-relaxed"
+            >
+              "Eu dobrei meu faturamento, mas o maior ganho foi ter paz de
+              espírito e tempo para minha família. Isso não tem preço."
+            </h4>
+          </div>
+          <div>
+            <div class="quote-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="44"
+                height="44"
+                fill="currentColor"
+                class="bi bi-quote mx-auto"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 9 7.558V11a1 1 0 0 0 1 1h2Zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612c0-.351.021-.703.062-1.054.062-.372.166-.703.31-.992.145-.29.331-.517.559-.683.227-.186.516-.279.868-.279V3c-.579 0-1.085.124-1.52.372a3.322 3.322 0 0 0-1.085.992 4.92 4.92 0 0 0-.62 1.458A7.712 7.712 0 0 0 3 7.558V11a1 1 0 0 0 1 1h2Z"
+                />
+              </svg>
+            </div>
+            <h4
+              class="font-playfair text-2xl md:text-3xl font-bold leading-relaxed"
+            >
+              "A metodologia do Moacir me ensinou que cuidar de mim era o melhor
+              investimento que eu poderia fazer na minha empresa."
+            </h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio" class="pt-20 md:pt-32 bg-[#121212]">
+      <div class="container mx-auto max-w-7xl px-6 mb-12 md:mb-20">
+        <p class="text-sm uppercase tracking-widest text-gray-400">
+          Coerência e prática
+          <b class="font-bold text-white">eu vivo o que ensino</b>
+        </p>
+        <h3 class="text-3xl md:text-4xl font-light mt-4 max-w-4xl">
+          Resultados sustentáveis nascem da coerência entre o que se fala e o
+          que se faz. Esta é a prova visual da minha jornada e dos valores que
+          pratico.
+        </h3>
+
+        <ul
+          id="portfolio-filters"
+          class="flex flex-wrap items-center gap-x-6 gap-y-3 mt-10"
+        >
+          <li>
+            <button class="filter-btn active" data-group="all">Todos</button>
+          </li>
+          <li>
+            <button class="filter-btn" data-group="corridas">
+              Corridas e Esportes
+            </button>
+          </li>
+          <li>
+            <button class="filter-btn" data-group="social">
+              Projetos Sociais
+            </button>
+          </li>
+          <li>
+            <button class="filter-btn" data-group="conexoes">
+              Eventos e Conexões
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <div id="portfolio-grid" class="w-full">
+        <div class="portfolio-sizer"></div>
+
+        <a href="#" class="portfolio-item" data-groups='["corridas", "social"]'>
+          <img
+            src="https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/1-1.jpg"
+            alt="Maratona Pela Vida"
+          />
+          <div class="portfolio-overlay">
+            <div class="portfolio-text">
+              <span class="text-sm uppercase tracking-widest"
+                >Corridas e Esportes / Projetos Sociais</span
+              >
+              <h3 class="text-2xl font-bold mt-1">Maratona Pela Vida</h3>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="portfolio-item" data-groups='["conexoes"]'>
+          <img
+            src="https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/2-1.jpg"
+            alt="Conexão de Líderes"
+          />
+          <div class="portfolio-overlay">
+            <div class="portfolio-text">
+              <span class="text-sm uppercase tracking-widest"
+                >Eventos e Conexões</span
+              >
+              <h3 class="text-2xl font-bold mt-1">Conexão de Líderes</h3>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="portfolio-item" data-groups='["social"]'>
+          <img
+            src="https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/3-1.jpg"
+            alt="Voluntariado em Ação"
+          />
+          <div class="portfolio-overlay">
+            <div class="portfolio-text">
+              <span class="text-sm uppercase tracking-widest"
+                >Projetos Sociais</span
+              >
+              <h3 class="text-2xl font-bold mt-1">Voluntariado em Ação</h3>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="portfolio-item" data-groups='["corridas"]'>
+          <img
+            src="https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/4-1.jpg"
+            alt="Treino em Equipe"
+          />
+          <div class="portfolio-overlay">
+            <div class="portfolio-text">
+              <span class="text-sm uppercase tracking-widest"
+                >Corridas e Esportes</span
+              >
+              <h3 class="text-2xl font-bold mt-1">Treino em Equipe</h3>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="portfolio-item" data-groups='["conexoes"]'>
+          <img
+            src="https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/5-1.jpg"
+            alt="Palestra sobre Liderança"
+          />
+          <div class="portfolio-overlay">
+            <div class="portfolio-text">
+              <span class="text-sm uppercase tracking-widest"
+                >Eventos e Conexões</span
+              >
+              <h3 class="text-2xl font-bold mt-1">
+                Palestra sobre Liderança Humana
+              </h3>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="portfolio-item" data-groups='["social", "conexoes"]'>
+          <img
+            src="https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/6-1.jpg"
+            alt="Evento Beneficente"
+          />
+          <div class="portfolio-overlay">
+            <div class="portfolio-text">
+              <span class="text-sm uppercase tracking-widest"
+                >Projetos Sociais / Conexões</span
+              >
+              <h3 class="text-2xl font-bold mt-1">Jantar Beneficente</h3>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section id="services-cta" class="bg-[#1f1f1f] text-center">
+      <a
+        href="#hello"
+        class="inline-block py-12 text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-white transition-colors duration-300"
+      >
+        vamos construir sua transformação juntos
+      </a>
+    </section>
+
+    <section class="parallax-section parallax-logos py-20 md:py-24">
+      <div class="container mx-auto max-w-7xl px-6 relative z-10">
+        <div class="logo-carousel">
+          <div>
+            <img
+              src="https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/white1.png"
+              alt="Logo Empresa Parceira 1"
+              class="mx-auto"
+            />
+          </div>
+          <div>
+            <img
+              src="https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/white2.png"
+              alt="Logo Empresa Parceira 2"
+              class="mx-auto"
+            />
+          </div>
+          <div>
+            <img
+              src="https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/white3.png"
+              alt="Logo Empresa Parceira 3"
+              class="mx-auto"
+            />
+          </div>
+          <div>
+            <img
+              src="https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/white4.png"
+              alt="Logo Empresa Parceira 4"
+              class="mx-auto"
+            />
+          </div>
+          <div>
+            <img
+              src="https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/white5.png"
+              alt="Logo Empresa Parceira 5"
+              class="mx-auto"
+            />
+          </div>
+          <div>
+            <img
+              src="https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/white6.png"
+              alt="Logo Empresa Parceira 6"
+              class="mx-auto"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="py-20 md:py-32 bg-[#1f1f1f]">
+      <div class="container mx-auto max-w-7xl px-6">
+        <div class="mb-12 md:mb-20">
+          <p class="text-sm uppercase tracking-widest text-gray-400">
+            Como funciona <b class="font-bold text-white">minha metodologia</b>
+          </p>
+          <h3 class="text-3xl md:text-4xl font-light mt-4 max-w-4xl">
+            Uma abordagem integral para performance sustentável. Não separamos o
+            profissional do pessoal, nós os integramos para gerar resultados
+            extraordinários.
+          </h3>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-[#2a2a2a] border border-gray-700 p-8">
+            <div class="mb-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                fill="currentColor"
+                class="text-yellow-400"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                />
+                <path
+                  d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+                />
+              </svg>
+            </div>
+            <h5 class="text-xl font-bold uppercase tracking-widest mb-4">
+              Propósito e Visão.
+            </h5>
+            <p class="text-gray-400">
+              Redescobrimos seu 'porquê' para alinhar suas metas de negócio com
+              sua missão de vida, criando uma motivação inabalável.
+            </p>
+          </div>
+
+          <div class="bg-[#2a2a2a] border border-gray-700 p-8">
+            <div class="mb-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                fill="currentColor"
+                class="text-yellow-400"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8 16a.5.5 0 0 0 .5-.5V3.14l4.853 4.853a.5.5 0 0 0 .708-.708L8.707 2.293a1 1 0 0 0-1.414 0L2.146 7.287a.5.5 0 0 0 .708.708L7.5 3.14V15.5a.5.5 0 0 0 .5.5z"
+                />
+              </svg>
+            </div>
+            <h5 class="text-xl font-bold uppercase tracking-widest mb-4">
+              Hábitos de Performance.
+            </h5>
+            <p class="text-gray-400">
+              Implementamos rotinas de saúde, disciplina e foco que transbordam
+              do pessoal para o profissional, otimizando sua energia.
+            </p>
+          </div>
+
+          <div class="bg-[#2a2a2a] border border-gray-700 p-8">
+            <div class="mb-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                fill="currentColor"
+                class="text-yellow-400"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"
+                />
+              </svg>
+            </div>
+            <h5 class="text-xl font-bold uppercase tracking-widest mb-4">
+              Conexões Genuínas.
+            </h5>
+            <p class="text-gray-400">
+              Desenvolvemos networking e relacionamentos baseados em confiança e
+              valor mútuo, não apenas em transações comerciais.
+            </p>
+          </div>
+
+          <div class="bg-[#2a2a2a] border border-gray-700 p-8">
+            <div class="mb-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                fill="currentColor"
+                class="text-yellow-400"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M1.313 1.313C2.453.172 4.295 0 6.5 0c2.551 0 4.636.586 6.206 1.767C14.28 2.91 15 4.542 15 6.527c0 2.29-1.04 4.485-3.042 5.923-1.325.96-2.95 1.442-4.458 1.442-1.722 0-3.35-.416-4.634-1.23.11-.082.227-.17.34-.265.23-.205.478-.44.74-.707.307-.306.633-.655.978-1.04.346-.387.712-.818 1.09-1.291.56-.697 1.14-1.46 1.732-2.288.59-83.996-1.812 1.542-2.825.13-.3-.027-.59-.05-.867-.068-1.08-.07-2.12-.13-3.05-.183-.932-.053-1.782-.093-2.52-.116a2.031 2.031 0 0 1-1.428-.53c-.356-.34-.54-.77-.54-1.234 0-.464.184-.895.54-1.234z"
+                />
+                <path
+                  d="M11.958 13.332c-.31-.31-.57-.63-.78-1.032a2.834 2.834 0 0 1-.183-1.044c0-1.49.89-2.73 2.52-2.73.41 0 .805.075 1.15.225l.028.012c.32.128.604.29.84.49.236.2.433.42.593.655.16.235.282.485.368.75.122.37.184.755.184 1.153 0 .42-.06.82-.182 1.196-.123.376-.3.72-.53 1.022-.23.303-.5.567-.808.793-.31.225-.65.41-1.02.555-.37.145-.76.22-1.17.22-1.49 0-2.73-.89-2.73-2.52 0-.39.06-.76.183-1.11a2.82 2.82 0 0 1 .49-.867c.21-.28.45-.52.72-.73z"
+                />
+              </svg>
+            </div>
+            <h5 class="text-xl font-bold uppercase tracking-widest mb-4">
+              Impacto e Legado.
+            </h5>
+            <p class="text-gray-400">
+              Conectamos seu sucesso a um propósito maior, seja através de
+              projetos sociais ou da construção de um legado que transcende o
+              lucro.
+            </p>
+          </div>
+
+          <div class="bg-[#2a2a2a] border border-gray-700 p-8">
+            <div class="mb-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                fill="currentColor"
+                class="text-yellow-400"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                />
+              </svg>
+            </div>
+            <h5 class="text-xl font-bold uppercase tracking-widest mb-4">
+              Liderança Humana.
+            </h5>
+            <p class="text-gray-400">
+              Desenvolvemos uma liderança que inspira pelo exemplo, baseada em
+              empatia, vulnerabilidade e na capacidade de extrair o melhor de
+              cada pessoa.
+            </p>
+          </div>
+
+          <div class="bg-[#2a2a2a] border border-gray-700 p-8">
+            <div class="mb-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                fill="currentColor"
+                class="text-yellow-400"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8 15.5a.5.5 0 0 0 .5-.5v-13a.5.5 0 0 0-1 0v13a.5.5 0 0 0 .5.5z"
+                />
+                <path
+                  d="M5.354 4.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8 5.793 5.354 4.146zM10.646 11.854a.5.5 0 0 0 .708-.708l-2-2a.5.5 0 0 0-.708 0l-2 2a.5.5 0 1 0 .708.708L8 10.207l2.646 2.647z"
+                />
+              </svg>
+            </div>
+            <h5 class="text-xl font-bold uppercase tracking-widest mb-4">
+              Resultados Sustentáveis.
+            </h5>
+            <p class="text-gray-400">
+              O objetivo final é criar um crescimento consistente e duradouro,
+              que não esgota sua energia nem sacrifica sua qualidade de vida.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section
+      class="parallax-section parallax-final flex items-center justify-center text-center py-32 md:py-40"
+    >
+      <div class="container mx-auto max-w-7xl px-6 relative z-10">
+        <a href="#hello">
+          <h2
+            class="text-3xl md:text-4xl font-light tracking-wider leading-relaxed"
+          >
+            Você quer apenas vender mais<br />ou transformar sua vida por
+            completo?
+          </h2>
+        </a>
+      </div>
+    </section>
+
+    <section id="blog" class="py-20 md:py-32 bg-[#121212]">
+      <div class="container mx-auto max-w-7xl px-6">
+        <div class="mb-12 md:mb-20">
+          <p class="text-sm uppercase tracking-widest text-gray-400">
+            Minhas Reflexões
+            <b class="font-bold text-white">Insights da Jornada</b>
+          </p>
+          <h3 class="text-3xl md:text-4xl font-light mt-4 max-w-4xl">
+            Aprendizados sobre negócios, vida e a busca por um sucesso que
+            realmente preenche. Compartilho aqui um pouco do que aprendi no
+            caminho.
+          </h3>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+          <div class="journal-item flex items-center">
+            <div
+              class="journal-text-block line-left bg-[#1f1f1f] p-8 md:p-12 w-full"
+            >
+              <p class="text-xs uppercase tracking-widest text-gray-500 mb-4">
+                Por: Moacir. <span class="ml-4">Setembro 05, 2025.</span>
+              </p>
+              <h5 class="text-2xl font-bold mb-4">O ROI de uma Maratona</h5>
+              <a
+                href="#"
+                class="text-yellow-400 text-xs font-bold uppercase tracking-widest hover:text-white transition-colors"
+                >Ler Mais</a
+              >
+            </div>
+          </div>
+
+          <div class="journal-item flex flex-col md:flex-row bg-[#1f1f1f]">
+            <div
+              class="journal-text-block line-left p-8 md:p-12 w-full md:w-1/2 flex flex-col justify-center"
+            >
+              <p class="text-xs uppercase tracking-widest text-gray-500 mb-4">
+                Por: Moacir. <span class="ml-4">Agosto 21, 2025.</span>
+              </p>
+              <h5 class="text-2xl font-bold mb-4">
+                Liderança se aprende servindo.
+              </h5>
+              <a
+                href="#"
+                class="text-yellow-400 text-xs font-bold uppercase tracking-widest hover:text-white transition-colors"
+                >Ler Mais</a
+              >
+            </div>
+            <div class="w-full md:w-1/2">
+              <img
+                src="https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/1.jpg"
+                alt="Voluntariado"
+                class="h-full w-full object-cover"
+              />
+            </div>
+          </div>
+
+          <div class="journal-item flex flex-col md:flex-row bg-[#1f1f1f]">
+            <div class="w-full md:w-1/2 order-last md:order-first">
+              <img
+                src="https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/2.jpg"
+                alt="Networking"
+                class="h-full w-full object-cover"
+              />
+            </div>
+            <div
+              class="journal-text-block line-right p-8 md:p-12 w-full md:w-1/2 flex flex-col justify-center"
+            >
+              <p class="text-xs uppercase tracking-widest text-gray-500 mb-4">
+                Por: Moacir. <span class="ml-4">Julho 30, 2025.</span>
+              </p>
+              <h5 class="text-2xl font-bold mb-4">
+                Networking vs. Conexão Real.
+              </h5>
+              <a
+                href="#"
+                class="text-yellow-400 text-xs font-bold uppercase tracking-widest hover:text-white transition-colors"
+                >Ler Mais</a
+              >
+            </div>
+          </div>
+
+          <div class="journal-item flex flex-col md:flex-row bg-[#1f1f1f]">
+            <div
+              class="journal-text-block line-left p-8 md:p-12 w-full md:w-1/2 flex flex-col justify-center"
+            >
+              <p class="text-xs uppercase tracking-widest text-gray-500 mb-4">
+                Por: Moacir. <span class="ml-4">Julho 15, 2025.</span>
+              </p>
+              <h5 class="text-2xl font-bold mb-4">A disciplina que liberta.</h5>
+              <a
+                href="#"
+                class="text-yellow-400 text-xs font-bold uppercase tracking-widest hover:text-white transition-colors"
+                >Ler Mais</a
+              >
+            </div>
+            <div class="w-full md:w-1/2">
+              <img
+                src="https://demowp.vegatheme.com/talos-corporate/wp-content/uploads/sites/30/2016/11/3.jpg"
+                alt="Rotina"
+                class="h-full w-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-[#1f1f1f] text-center">
+      <a
+        href="#"
+        class="inline-block py-12 text-sm font-bold uppercase tracking-widest text-gray-400 hover:text-white transition-colors duration-300"
+      >
+        todos os insights
+      </a>
+    </section>
+
+    <section id="hello" class="relative h-96 md:h-[500px]">
+      <div class="absolute inset-0 bg-map-image bg-cover bg-center"></div>
+    </section>
+
+    <section class="relative z-10 -mt-24 pb-20 md:pb-32">
+      <div class="container mx-auto max-w-7xl px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-px">
+          <div class="bg-[#242424] p-8 text-center">
+            <p class="text-sm uppercase tracking-widest text-gray-400 mb-4">
+              1. <b class="font-bold text-white">me envie uma mensagem.</b>
+            </p>
+            <a
+              href="mailto:contato@moacir.com"
+              class="block text-gray-300 hover:text-yellow-400 transition-colors"
+              >contato@moacir.com</a
+            >
+            <a
+              href="mailto:suporte@moacir.com"
+              class="block text-gray-300 hover:text-yellow-400 transition-colors"
+              >suporte@moacir.com</a
+            >
+          </div>
+
+          <div class="bg-[#171717] p-8 text-center">
+            <p class="text-sm uppercase tracking-widest text-gray-400 mb-4">
+              2. <b class="font-bold text-white">vamos conversar.</b>
+            </p>
+            <a
+              href="tel:+5547912345678"
+              class="block text-gray-300 hover:text-yellow-400 transition-colors"
+              >(47) 91234-5678</a
+            >
+          </div>
+
+          <div class="bg-[#101010] p-8 text-center">
+            <p class="text-sm uppercase tracking-widest text-gray-400 mb-4">
+              3. <b class="font-bold text-white">me encontre.</b>
+            </p>
+            <p class="text-gray-300">Eventos e Palestras<br />São Paulo - SP</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact-form" class="py-20 md:py-32 bg-[#1f1f1f]">
+      <div class="container mx-auto max-w-7xl px-6">
+        <form action="#" method="POST">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
+            <div>
+              <input
+                type="text"
+                name="name"
+                class="form-input"
+                placeholder="SEU NOME: *"
+                required
+              />
+            </div>
+            <div>
+              <input
+                type="email"
+                name="email"
+                class="form-input"
+                placeholder="SEU MELHOR E-MAIL: *"
+                required
+              />
+            </div>
+          </div>
+          <div class="mt-12">
+            <textarea
+              name="message"
+              rows="4"
+              class="form-input"
+              placeholder="QUAL É O SEU MAIOR DESAFIO HOJE?"
+            ></textarea>
+          </div>
+          <div class="text-center mt-12">
+            <button type="submit" class="submit-btn">
+              QUERO COMEÇAR MINHA TRANSFORMAÇÃO
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer class="bg-[#121212] pt-16 pb-8">
+      <div class="container mx-auto max-w-7xl px-6">
+        <div
+          class="flex flex-col md:flex-row justify-between items-center mb-8"
+        >
+          <div class="mb-8 md:mb-0">
+            <img src="./icone.png" alt="Moacir Logo" class="h-10" />
+          </div>
+        </div>
+        <hr class="border-gray-800 my-8" />
+        <div
+          class="flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm"
+        >
+          <div class="mb-4 md:mb-0">
+            <p>2025 © Moacir. Todos os direitos reservados.</p>
+          </div>
+          <div class="mb-4 md:mb-0">
+            <a href="#" id="scroll-to-top" class="scroll-to-top-btn">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"
+                />
+              </svg>
+            </a>
+          </div>
+          <div class="text-right">
+            <p>Desenvolvido com propósito.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Shuffle/6.0.0/shuffle.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
+
+    <!-- Tiny Slider JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // --- Mobile Menu Toggle ---
+        const menuToggleBtn = document.getElementById('menu-toggle-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+          menuToggleBtn.classList.toggle('open');
+          mobileMenu.classList.toggle('hidden');
+          document.body.classList.toggle('overflow-hidden'); // Impede a rolagem quando o menu está aberto
+        }
+
+        menuToggleBtn.addEventListener('click', toggleMenu);
+
+        // Fecha o menu quando um link é clicado
+        mobileLinks.forEach(link => {
+          link.addEventListener('click', toggleMenu);
+        });
+
+        // --- Active Nav Link Styling on Scroll ---
+        const mainNavLinks = document.querySelectorAll('.main-nav a');
+        const sections = document.querySelectorAll('main, section');
+
+        const observerOptions = {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.3,
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const currentId = entry.target.id;
+              mainNavLinks.forEach(link => {
+                link.classList.remove('active', 'text-white');
+                link.classList.add('text-gray-400');
+                if (link.getAttribute('href').includes(currentId)) {
+                  link.classList.add('active', 'text-white');
+                  link.classList.remove('text-gray-400');
+                }
+              });
+            }
+          });
+        }, observerOptions);
+
+        sections.forEach(section => {
+          observer.observe(section);
+        });
+
+        // --- Counter Animation ---
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200; // Quanto menor o número, mais rápido a contagem
+
+        const counterObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                const counter = entry.target;
+                const updateCount = () => {
+                  const target = +counter.getAttribute('data-target');
+                  const count = +counter.innerText;
+                  const increment = target / speed;
+
+                  if (count < target) {
+                    counter.innerText = Math.ceil(count + increment);
+                    setTimeout(updateCount, 1);
+                  } else {
+                    counter.innerText = target;
+                  }
+                };
+                updateCount();
+                observer.unobserve(counter); // Para de observar após animar
+              }
+            });
+          },
+          { threshold: 0.5 },
+        );
+
+        counters.forEach(counter => {
+          counterObserver.observe(counter);
+        });
+
+        // --- Testimonial Slider Initialization ---
+        if (document.querySelector('.testimonial-slider')) {
+          tns({
+            container: '.testimonial-slider',
+            items: 1,
+            slideBy: 'page',
+            autoplay: true,
+            controls: false,
+            autoplayButtonOutput: false,
+            mouseDrag: true,
+            lazyload: true,
+            mode: 'gallery',
+            speed: 500,
+          });
+        }
+
+        // --- Portfolio Filter (Shuffle.js) ---
+        const portfolioGrid = document.getElementById('portfolio-grid');
+        const filterButtons = document.querySelector('#portfolio-filters');
+
+        if (portfolioGrid) {
+          const shuffleInstance = new Shuffle(portfolioGrid, {
+            itemSelector: '.portfolio-item',
+            sizer: '.portfolio-sizer', // Usa o elemento sizer para calcular as colunas
+          });
+
+          filterButtons.addEventListener('click', event => {
+            if (event.target.tagName !== 'BUTTON') {
+              return;
+            }
+            const btn = event.target;
+            const group = btn.getAttribute('data-group');
+
+            // Remove a classe 'active' de todos os botões
+            filterButtons.querySelector('.active').classList.remove('active');
+
+            // Adiciona a classe 'active' ao botão clicado
+            btn.classList.add('active');
+
+            // Filtra os itens
+            shuffleInstance.filter(group);
+          });
+        }
+
+        if (document.querySelector('.logo-carousel')) {
+          tns({
+            container: '.logo-carousel',
+            items: 2, // Itens visíveis em telas pequenas
+            slideBy: 'page',
+            autoplay: true,
+            autoplayTimeout: 3000,
+            autoplayButtonOutput: false,
+            speed: 400,
+            controls: false,
+            nav: true, // Habilita a navegação por pontos/linhas
+            navPosition: 'bottom',
+            mouseDrag: true,
+            responsive: {
+              640: {
+                // A partir de 640px de largura
+                items: 3,
+              },
+              768: {
+                // A partir de 768px de largura
+                items: 4,
+              },
+              1024: {
+                // A partir de 1024px de largura
+                items: 5,
+              },
+            },
+          });
+        }
+
+        // --- Skills Bar Animation ---
+        const skillBars = document.querySelectorAll('.progress-bar');
+
+        const skillObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach(entry => {
+              // Quando a barra entra na tela
+              if (entry.isIntersecting) {
+                const bar = entry.target;
+                const targetWidth = bar.getAttribute('data-width');
+
+                // Aplica a largura alvo para iniciar a animação CSS
+                bar.style.width = targetWidth;
+
+                // Para de observar a barra para não animar de novo
+                observer.unobserve(bar);
+              }
+            });
+          },
+          {
+            threshold: 0.5, // Começa a animação quando 50% da barra estiver visível
+          },
+        );
+
+        skillBars.forEach(bar => {
+          skillObserver.observe(bar);
+        });
+
+        // --- Journal Item Animation on Scroll ---
+        const journalItems = document.querySelectorAll('.journal-item');
+
+        const journalObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            threshold: 0.1, // Anima quando 10% do item estiver visível
+          },
+        );
+
+        journalItems.forEach(item => {
+          journalObserver.observe(item);
+        });
+
+        // --- Scroll to Top Button ---
+        const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+        if (scrollToTopBtn) {
+          scrollToTopBtn.addEventListener('click', event => {
+            event.preventDefault(); // Impede o comportamento padrão do link
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth', // A mágica da rolagem suave
+            });
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
