@@ -437,43 +437,72 @@
       }
 
       #home {
-        /* Sua imagem de fundo atual */
+        /* Imagem de fundo principal (a versão limpa, sem filtro) */
         background-image: url('./imagens/corrida-principal.jpg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
 
-        position: relative; /* Necessário para posicionar o pseudo-elemento */
-        overflow: hidden; /* Garante que o gradiente não vaze */
+        position: relative;
+        overflow: hidden;
+
+        /* Centraliza o conteúdo */
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       #home::before {
+        /* O filtro escuro que fica por cima da imagem de fundo */
         content: '';
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: radial-gradient(
-          ellipse at center,
-          rgba(0, 0, 0, 0) 0%,
-          rgba(0, 0, 0, 0.3) 50%,
-          rgba(0, 0, 0, 0.7) 100%
-        );
-        z-index: 1; /* Garante que o overlay fique por cima da imagem */
+
+        /* Ajuste a opacidade (0.7 = 70%) para o quão escuro você quer */
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 1; /* Fica acima do background do #home */
       }
 
-      /* Estilo para o texto, garantindo que ele fique por cima do overlay */
       #home h1 {
-        /* Suas propriedades atuais */
         position: relative;
-        z-index: 2;
-        color: transparent;
-        -webkit-text-stroke-width: 1px;
-        -webkit-text-stroke-color: white;
+        margin-top: -3rem;
+        z-index: 2; /* Fica acima do filtro escuro */
 
-        /* Adicione esta linha: */
-        text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        /* Estilos do seu texto */
+        font-family: 'Playfair Display', serif;
+        font-weight: 900; /* Use um peso bem forte para o contorno ficar bom */
+        font-size: clamp(4rem, 15vw, 10rem);
+        text-align: center;
+        line-height: 1.1;
+
+        /* --- AQUI COMBINAMOS OS DOIS EFEITOS --- */
+
+        /* 1. Efeito de "janela" revelando a imagem limpa */
+        /* O H1 também recebe a imagem de fundo limpa */
+        background-image: url('./imagens/corrida-principal.jpg');
+        background-size: cover;
+        background-position: center;
+        /* Chave para alinhar perfeitamente o fundo do texto com o fundo da página */
+        background-attachment: fixed;
+
+        /* Recorta o fundo para ser visível apenas no texto */
+        -webkit-background-clip: text;
+        background-clip: text;
+
+        /* O preenchimento do texto fica transparente para mostrar o fundo recortado */
+        color: transparent;
+
+        /* 2. Efeito de contorno que você pediu para voltar */
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: rgba(
+          255,
+          255,
+          255,
+          0.9
+        ); /* Branco com leve transparência fica elegante */
       }
     </style>
   </head>
@@ -559,7 +588,7 @@
       </h1>
     </main>
 
-    <section id="about" class="md:py-32">
+    <section id="about" class="py-20 md:py-32">
       <div class="container mx-auto max-w-7xl px-6">
         <div class="mb-20 md:mb-32">
           <img
@@ -575,7 +604,7 @@
           <h2
             class="text-white text-4xl md:text-5xl font-bold uppercase tracking-widest mb-4"
           >
-            A Jornada de Moacir
+            SOBRE MIM
           </h2>
           <p class="text-gray-400 max-w-3xl mx-auto">
             Da busca por resultados à descoberta de um propósito maior. Esta é a
@@ -583,6 +612,39 @@
           </p>
         </div>
 
+        <div
+          class="flex flex-col-reverse md:flex-row gap-12 lg:gap-16 items-start mb-20 md:mb-32"
+        >
+          <div class="w-full md:w-1/2">
+            <img
+              src="./imagens/moacir-sobremim.jpg"
+              alt="Retrato de Moacir"
+              class="w-full h-auto rounded-lg shadow-xl"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="w-full md:w-1/2">
+            <p class="text-gray-300 text-lg mb-6 leading-relaxed">
+              Me chamo Moacir e por anos busquei o sucesso empresarial a
+              qualquer custo. Até descobrir que estava perdendo o que mais
+              importava no caminho. Hoje, combino estratégias de negócios com
+              hábitos saudáveis, projetos sociais e relacionamentos autênticos.
+            </p>
+            <p class="text-gray-400 mb-8 leading-relaxed">
+              Participo de corridas, me envolvo em causas e construo conexões
+              genuínas - não apesar do meu sucesso empresarial, mas como parte
+              dele. Ajudo outros empresários a descobrirem que a transformação
+              pessoal é o caminho mais sustentável para resultados
+              extraordinários.
+            </p>
+
+            <h4 class="font-playfair text-2xl text-yellow-400">Moacir</h4>
+            <p class="text-sm text-gray-500 tracking-widest uppercase">
+              Estrategista & Mentor
+            </p>
+          </div>
+        </div>
         <div
           class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left"
         >
@@ -842,14 +904,14 @@
           </div>
         </a>
 
-        <a href="#" class="portfolio-item" data-groups='["conexoes"]'>
-          <img src="./imagens/2.jpg" alt="Conexão de Líderes" />
+        <a href="#" class="portfolio-item" data-groups='["corridas"]'>
+          <img src="./imagens/2.jpg" alt="Academia" />
           <div class="portfolio-overlay">
             <div class="portfolio-text">
               <span class="text-sm uppercase tracking-widest">
                 Eventos e Conexões
               </span>
-              <h3 class="text-2xl font-bold mt-1">Conexão de Líderes</h3>
+              <h3 class="text-2xl font-bold mt-1">Academia</h3>
             </div>
           </div>
         </a>
@@ -878,7 +940,7 @@
           </div>
         </a>
 
-        <a href="#" class="portfolio-item" data-groups='["conexoes"]'>
+        <a href="#" class="portfolio-item" data-groups='["corridas"]'>
           <img src="./imagens/ciclismo.jpg" alt="Palestra sobre Liderança" />
           <div class="portfolio-overlay">
             <div class="portfolio-text">
@@ -898,6 +960,30 @@
                 Projetos Sociais / Conexões
               </span>
               <h3 class="text-2xl font-bold mt-1">Beneficente</h3>
+            </div>
+          </div>
+        </a>
+
+        <a href="#" class="portfolio-item" data-groups='["conexoes"]'>
+          <img src="./imagens/10.jpg" alt="Equipe de Trabalhadores" />
+          <div class="portfolio-overlay">
+            <div class="portfolio-text">
+              <span class="text-sm uppercase tracking-widest">
+                Projetos Sociais / Conexões
+              </span>
+              <h3 class="text-2xl font-bold mt-1">Equipe de Trabalhadores</h3>
+            </div>
+          </div>
+        </a>
+
+        <a href="#" class="portfolio-item" data-groups='["conexoes"]'>
+          <img src="./imagens/robo.jpg" alt="Astronuta" />
+          <div class="portfolio-overlay">
+            <div class="portfolio-text">
+              <span class="text-sm uppercase tracking-widest">
+                Projetos Sociais / Conexões
+              </span>
+              <h3 class="text-2xl font-bold mt-1">Astronuta</h3>
             </div>
           </div>
         </a>
